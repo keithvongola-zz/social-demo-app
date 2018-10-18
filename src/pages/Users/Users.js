@@ -1,9 +1,17 @@
 import React, { PureComponent } from 'react';
 import {
-  View, Text, SafeAreaView, Button,
+  View, SafeAreaView, Button,
 } from 'react-native';
+import { connect } from 'react-redux';
+import {
+  getUsers,
+} from '../../actions/data';
 
 class Users extends PureComponent {
+  componentDidMount() {
+    this.props.getUsers();
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.safe}>
@@ -31,4 +39,9 @@ const styles = {
 
   },
 };
-export default Users;
+
+const mapDispatchToProps = dispatch => ({
+  getUsers: () => dispatch(getUsers()),
+});
+
+export default connect(null, mapDispatchToProps)(Users);
