@@ -1,12 +1,16 @@
 import React, { PureComponent } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import {
+  View, Text, SafeAreaView,
+} from 'react-native';
 
-class Home extends PureComponent {
+class TodoDetail extends PureComponent {
   render() {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
-          <Text style={styles.text}>Home</Text>
+          <Text style={styles.text}>
+            Todo detail
+          </Text>
         </View>
       </SafeAreaView>
     );
@@ -26,4 +30,4 @@ const styles = {
 
   },
 };
-export default Home;
+export default TodoDetail;

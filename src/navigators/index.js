@@ -1,17 +1,65 @@
-import { createBottomTabNavigator } from 'react-navigation';
-import { Home } from '../pages/Home';
+import { createStackNavigator } from 'react-navigation';
+import { Users, UserDetail } from '../pages/Users';
+import { Album, Photo } from '../pages/Album';
+import { Posts, PostDetail } from '../pages/Post';
+import { Todos, TodoDetail } from '../pages/Todo';
 
 const routeConfigs = {
-  Home: {
-    screen: Home,
+  Users: {
+    screen: Users,
     navigationOptions: () => ({
-      title: 'Home',
+      title: 'Users',
+    }),
+  },
+  UserDetail: {
+    screen: UserDetail,
+    navigationOptions: () => ({
+      title: 'User Detail',
+    }),
+  },
+  Album: {
+    screen: Album,
+    navigationOptions: () => ({
+      title: 'Album',
+    }),
+  },
+  Photo: {
+    screen: Photo,
+    navigationOptions: () => ({
+      title: 'Photo',
+    }),
+  },
+  Posts: {
+    screen: Posts,
+    navigationOptions: () => ({
+      title: 'Post',
+    }),
+  },
+  PostDetail: {
+    screen: PostDetail,
+    navigationOptions: () => ({
+      title: 'Post Detail',
+    }),
+  },
+  Todos: {
+    screen: Todos,
+    navigationOptions: () => ({
+      title: 'Todos',
+    }),
+  },
+  TodoDetail: {
+    screen: TodoDetail,
+    navigationOptions: () => ({
+      title: 'Todo Detail',
     }),
   },
 };
 
-const BottomTabNavigatorConfig = {
+const StackNavigatorConfig = {
 
 };
 
-export default createBottomTabNavigator(routeConfigs, BottomTabNavigatorConfig);
+export default createStackNavigator(
+  routeConfigs,
+  StackNavigatorConfig,
+);
