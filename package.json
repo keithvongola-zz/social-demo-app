@@ -31,4 +31,3 @@
     "preset": "react-native"
   }
 }
-add dependency for immutable, react-navigation, react-redux, redux, redux-saga, reselect
