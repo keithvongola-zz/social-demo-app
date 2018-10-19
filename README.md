@@ -1,11 +1,9 @@
 # Social Demo App
-____
 A demo social network app which has a list of users.
 
 Each user will have albums, posts and todos.
 
 ## Installation
-___
 #### - via CLI
 1. Clone this repository.
 2. Run `npm i`
