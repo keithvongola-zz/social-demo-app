@@ -93,5 +93,8 @@ export const selectComments = createSelector(
 
 export const selectTodos = createSelector(
   selectData,
-  data => data.get('todos'),
+  (data) => {
+    const todos = data.get('todos').sortBy(o => o.get('completed'));
+    return todos;
+  },
 );

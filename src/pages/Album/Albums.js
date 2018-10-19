@@ -5,9 +5,11 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import { AlbumItem } from '../../components';
 
-class Album extends PureComponent {
+class Albums extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -26,7 +28,7 @@ class Album extends PureComponent {
     navigation.navigate('Albums');
   }
 
-  _renderAlbumItem({ item, index }) {
+  _renderAlbumItem({ item }) {
     return (
       <AlbumItem
         isPlaceholder={item.get('isPlaceholder') || false}
@@ -70,4 +72,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Album;
+Albums.propTypes = {
+  albums: PropTypes.instanceOf(List).isRequired,
+};
+
+export default Albums;

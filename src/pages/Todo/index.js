@@ -1,4 +1,3 @@
-import Todos from './Todos';
-import TodoDetail from './TodoDetail';
+import Todos from './Todos.Container';
 
-export { Todos, TodoDetail };
+export { Todos };

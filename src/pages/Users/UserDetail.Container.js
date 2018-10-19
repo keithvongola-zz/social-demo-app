@@ -6,6 +6,10 @@ import {
   selectPosts,
 } from '../../selectors/data';
 import {
+  selectAlbumsLoading,
+  selectPostsLoading,
+} from '../../selectors/ui';
+import {
   getAlbums,
   getPosts,
   getTodos,
@@ -15,6 +19,7 @@ const mapStateToProps = (state, props) => ({
   user: selectUser(state, props),
   albums: selectAlbumsPreview(state, 5),
   posts: selectPosts(state),
+  loading: selectAlbumsLoading(state) && selectPostsLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({

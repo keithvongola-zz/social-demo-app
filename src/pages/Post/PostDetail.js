@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
+  ActivityIndicator,
   View,
   FlatList,
   SafeAreaView,
@@ -8,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
 import { PostItem, CommentItem } from '../../components';
+import { metrics } from '../../styles';
 
 class PostDetail extends PureComponent {
   constructor(props) {
@@ -36,24 +38,37 @@ class PostDetail extends PureComponent {
   }
 
   render() {
-    const { post, comments } = this.props;
+    const { post, comments, loading } = this.props;
 
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
-          <FlatList
-            ListHeaderComponent={(
-              <PostItem
-                id={post.get('id')}
-                title={post.get('title')}
-                body={post.get('body')}
+          {
+          loading
+            ? (
+              <ActivityIndicator
+                animating
+                size="large"
+                style={styles.activityIndicator}
               />
+            )
+            : (
+              <FlatList
+                ListHeaderComponent={(
+                  <PostItem
+                    id={post.get('id')}
+                    title={post.get('title')}
+                    body={post.get('body')}
+                  />
               )
             }
-            data={comments && comments.toArray()}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-          />
+                data={comments && comments.toArray()}
+                renderItem={this._renderItem}
+                keyExtractor={this._keyExtractor}
+              />
+            )
+        }
+
         </View>
       </SafeAreaView>
     );
@@ -67,10 +82,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  activityIndicator: {
+    marginTop: metrics.V_PADDING,
+  },
 });
 
 PostDetail.propTypes = {
   getComments: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
   post: PropTypes.instanceOf(Map).isRequired,
   comments: PropTypes.instanceOf(List).isRequired,
 };

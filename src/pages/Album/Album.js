@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import { AlbumItem } from '../../components';
 
 class Album extends PureComponent {
@@ -64,4 +66,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+Album.propTypes = {
+  photos: PropTypes.instanceOf(List).isRequired,
+};
+
 export default Album;

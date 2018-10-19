@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation';
 import { Users, UserDetail } from '../pages/Users';
 import { Albums, Album, Photo } from '../pages/Album';
 import { PostDetail } from '../pages/Post';
-import { Todos, TodoDetail } from '../pages/Todo';
+import { Todos } from '../pages/Todo';
 import WebPage from '../pages/WebPage';
 
 const routeConfigs = {
@@ -43,12 +43,6 @@ const routeConfigs = {
     screen: Todos,
     navigationOptions: () => ({
       title: 'Todos',
-    }),
-  },
-  TodoDetail: {
-    screen: TodoDetail,
-    navigationOptions: () => ({
-      title: 'Todo Detail',
     }),
   },
   WebPage: {
