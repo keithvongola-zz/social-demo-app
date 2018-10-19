@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
 import { TodoItem } from '../../components';
+import { colors } from '../../styles';
 
 class Todos extends PureComponent {
   constructor(props) {
@@ -45,6 +46,7 @@ class Todos extends PureComponent {
 const styles = {
   safe: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   container: {
     flex: 1,

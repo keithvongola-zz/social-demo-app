@@ -184,6 +184,7 @@ export default class UserDetail extends PureComponent {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   container: {
     flex: 1,

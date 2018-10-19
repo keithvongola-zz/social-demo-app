@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
 import { AlbumItem } from '../../components';
+import { colors } from '../../styles';
 
 class Album extends PureComponent {
   constructor(props) {
@@ -59,6 +60,7 @@ class Album extends PureComponent {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   container: {
     flex: 1,

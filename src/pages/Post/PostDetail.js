@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
 import { PostItem, CommentItem } from '../../components';
-import { metrics } from '../../styles';
+import { metrics, colors } from '../../styles';
 
 class PostDetail extends PureComponent {
   constructor(props) {
@@ -78,9 +78,11 @@ class PostDetail extends PureComponent {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
+    backgroundColor: colors.lighter,
   },
   activityIndicator: {
     marginTop: metrics.V_PADDING,
