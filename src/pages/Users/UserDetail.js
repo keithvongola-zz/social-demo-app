@@ -25,6 +25,8 @@ export default class UserDetail extends PureComponent {
     this._onPostPress = this._onPostPress.bind(this);
     this._onEmailPress = this._onEmailPress.bind(this);
     this._onPhoneNumberPress = this._onPhoneNumberPress.bind(this);
+    this._onWebsitePress = this._onWebsitePress.bind(this);
+    this._onAddressPress = this._onAddressPress.bind(this);
   }
 
   _onEmailPress() {
@@ -51,6 +53,20 @@ export default class UserDetail extends PureComponent {
         return Linking.openURL(url);
       }
     }).catch(err => console.error('An error occurred', err));
+  }
+
+  _onWebsitePress() {
+    const { user, navigation } = this.props;
+    const url = `https://${user.get('website')}`;
+    navigation.navigate('WebPage', { url, title: 'Website' });
+  }
+
+  _onAddressPress() {
+    const { user, navigation } = this.props;
+    const geo = user.getIn(['address', 'geo']);
+    const url = `https://www.google.com/maps/search/?api=1&query=${geo.get('lat')},${geo.get('lng')}`;
+
+    navigation.navigate('WebPage', { url, title: 'Address' });
   }
 
   _onPostPress(id) {
@@ -102,11 +118,13 @@ export default class UserDetail extends PureComponent {
               icon={icWebsite}
               field="Website"
               value={user.get('website')}
+              onPress={this._onWebsitePress}
             />
             <InfoRow
               icon={icLocation}
               field="Address"
               value={address}
+              onPress={this._onAddressPress}
             />
             <Button
               title="To Todos"
