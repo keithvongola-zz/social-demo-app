@@ -16,9 +16,9 @@ class Album extends PureComponent {
     this._onMoreAlbumPress = this._onMoreAlbumPress.bind(this);
   }
 
-  _onAlbumPress(id) {
+  _onAlbumPress(id, title) {
     const { navigation } = this.props;
-    navigation.navigate('Album', { id });
+    navigation.navigate('Album', { id, title });
   }
 
   _onMoreAlbumPress() {

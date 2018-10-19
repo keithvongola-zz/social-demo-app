@@ -21,25 +21,22 @@ const routeConfigs = {
   Albums: {
     screen: Albums,
     navigationOptions: () => ({
-      title: 'Album',
+      title: 'Albums',
     }),
   },
   Album: {
     screen: Album,
-    navigationOptions: () => ({
-      title: 'Album',
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.getParam('title'),
     }),
   },
   Photo: {
     screen: Photo,
-    navigationOptions: () => ({
-      title: 'Photo',
-    }),
   },
   PostDetail: {
     screen: PostDetail,
     navigationOptions: () => ({
-      title: 'Post Detail',
+      title: 'Comments',
     }),
   },
   Todos: {
@@ -66,6 +63,7 @@ const StackNavigatorConfig = {
   headerBackTitleVisible: false,
   navigationOptions: () => ({
     headerBackTitle: null,
+    headerStyle: { borderBottomWidth: 0 },
   }),
 };
 

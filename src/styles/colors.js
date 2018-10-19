@@ -10,6 +10,8 @@ export default {
   white: '#FFF',
   transparent: 'transparent',
 
+  blue: '#007AFF',
+
   red: 'rgb(210, 0, 0)',
   successGreen: 'rgba(52, 209, 67, 1)',
   tomato: 'tomato',

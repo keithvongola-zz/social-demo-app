@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { fonts, metrics } from '../../styles';
+import { imagePlaceholder } from '../../images';
 
 const Photo = ({ navigation }) => {
   const uri = navigation.getParam('url');
@@ -16,6 +17,7 @@ const Photo = ({ navigation }) => {
     <View style={styles.container}>
       <Image
         source={{ uri }}
+        defaultSource={imagePlaceholder}
         style={styles.image}
         resizeMode="contain"
       />

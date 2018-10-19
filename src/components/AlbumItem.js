@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { imagePlaceholder } from '../images';
+import { fonts, colors } from '../styles';
 
 const itemWidth = Dimensions.get('window').width / 3;
 
@@ -23,8 +24,8 @@ class AlbumItem extends PureComponent {
       url,
     } = this.props;
     if (isPlaceholder) onPlaceholderPress();
-    else if (url) onPress(title, url);
-    else onPress(id);
+    else if (url) onPress(url, title);
+    else onPress(id, title);
   }
 
   render() {
@@ -47,9 +48,15 @@ class AlbumItem extends PureComponent {
                : <View style={styles.thumbnail} />
           }
           {
-            title && !hideTitle ? (
+            !hideTitle && title ? (
               <View style={styles.textContainer}>
-                <Text style={styles.title}>{title}</Text>
+                <Text
+                  style={thumbnailUrl ? styles.title : styles.more}
+                  numberOfLines={3}
+                  ellipsizeMode="tail"
+                >
+                  {title}
+                </Text>
               </View>
             ) : null
           }
@@ -80,11 +87,19 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: fonts.small,
+    fontWeight: fonts.bold,
+  },
+  more: {
+    textAlign: 'center',
+    fontSize: fonts.small,
+    fontWeight: fonts.bold,
+    color: colors.blue,
   },
   thumbnail: {
     height: itemWidth,
     width: itemWidth,
+    backgroundColor: colors.tomato,
   },
 });
 

@@ -14,7 +14,7 @@ class Album extends PureComponent {
     this._onItemPress = this._onItemPress.bind(this);
   }
 
-  _onItemPress(title, url) {
+  _onItemPress(url, title) {
     const { navigation } = this.props;
     navigation.navigate('Photo', { title, url });
   }

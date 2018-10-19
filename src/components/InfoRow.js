@@ -3,7 +3,7 @@ import {
   View, Text, TouchableOpacity, Image, StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { metrics, fonts } from '../styles';
+import { metrics, fonts, colors } from '../styles';
 
 const InfoRow = ({
   icon, field, value, onPress,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   value: {
     fontWeight: fonts.bold,
-    color: '#007AFF',
+    color: colors.blue,
   },
 });
 

@@ -81,6 +81,7 @@ export default class UserDetail extends PureComponent {
         title={item.get('title')}
         body={item.get('body')}
         onPress={this._onPostPress}
+        numberOfLines={2}
       />
     );
   }
