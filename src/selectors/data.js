@@ -8,10 +8,10 @@ export const selectUsers = createSelector(
   data => data.get('users'),
 );
 
-const selectUserId = (state, props) => props.navigation.getParam('id');
+const selectId = (state, props) => props.navigation.getParam('id');
 
 export const selectUser = createSelector(
-  [selectUsers, selectUserId],
+  [selectUsers, selectId],
   (users, userId) => {
     const user = users.find(o => o.get('id') === userId);
     return user;
@@ -28,13 +28,25 @@ export const selectPhotos = createSelector(
   data => data.get('photos'),
 );
 
+export const selectPhotosWithAlbumId = createSelector(
+  selectPhotos,
+  selectId,
+  (photos, albumId) => {
+    const albumPhotos = photos.filter(photo => photo.get('albumId') === albumId);
+    return albumPhotos;
+  },
+);
+
+const selectPreviewSize = (state, size) => size;
+
 export const selectAlbumsPreview = createSelector(
   selectAlbums,
   selectPhotos,
-  (albums, photos) => {
+  selectPreviewSize,
+  (albums, photos, size) => {
     if (photos.size === 0) return List();
-    // Get first 5 albums.
-    const preview = albums.slice(0, 5);
+    const preview = size ? albums.slice(0, size) : albums;
+
     // Get thumbnail for each album.
     const result = preview.reduce((acc, album) => {
       const photo = photos.find(o => o.get('albumId') === album.get('id'));
@@ -46,11 +58,13 @@ export const selectAlbumsPreview = createSelector(
       return acc;
     }, List());
 
+    if (result.size === 0) return List();
+    if (result.size === albums.size) return result;
+
     const placeholder = Map({
       id: 0,
       isPlaceholder: true,
-      title: `+${albums.size - 5} albums...`,
-      thumbnailUrl: '',
+      title: `+${albums.size - size} albums...`,
     });
 
     return result.push(placeholder);

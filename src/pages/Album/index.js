@@ -1,4 +1,5 @@
-import Album from './Album';
+import Albums from './AlbumsContainer';
+import Album from './AlbumContainer';
 import Photo from './Photo';
 
-export { Album, Photo };
+export { Albums, Album, Photo };

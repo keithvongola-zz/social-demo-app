@@ -3,7 +3,8 @@ import {
   View, SafeAreaView, Button, Text, FlatList, ScrollView, StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { AlbumItem, PostItem } from '../../components';
+import { PostItem } from '../../components';
+import Albums from '../Album/Albums';
 import { fonts } from '../../styles';
 
 export default class UserDetail extends PureComponent {
@@ -17,39 +18,13 @@ export default class UserDetail extends PureComponent {
     getAlbums(userId);
     getTodos(userId);
 
-    this._renderAlbumItem = this._renderAlbumItem.bind(this);
-    this._onAlbumPress = this._onAlbumPress.bind(this);
-    this._onMoreAlbumPress = this._onMoreAlbumPress.bind(this);
     this._renderPostItem = this._renderPostItem.bind(this);
     this._onPostPress = this._onPostPress.bind(this);
-  }
-
-  _onAlbumPress(id) {
-    const { navigation } = this.props;
-    navigation.navigate('Photo', { id });
-  }
-
-  _onMoreAlbumPress() {
-    const { navigation } = this.props;
-    navigation.navigate('Albums');
   }
 
   _onPostPress(id) {
     const { navigation } = this.props;
     navigation.navigate('PostDetail', { id });
-  }
-
-  _renderAlbumItem({ item, index }) {
-    return (
-      <AlbumItem
-        isPlaceholder={item.get('isPlaceholder') || false}
-        id={item.get('id')}
-        title={item.get('title')}
-        thumbnailUrl={item.get('thumbnailUrl')}
-        onPress={this._onAlbumPress}
-        onPlaceholderPress={this._onMoreAlbumPress}
-      />
-    );
   }
 
   _renderPostItem({ item, index }) {
@@ -68,7 +43,9 @@ export default class UserDetail extends PureComponent {
   }
 
   render() {
-    const { user, albums, posts } = this.props;
+    const {
+      user, albums, posts, navigation,
+    } = this.props;
 
     return (
       <SafeAreaView style={styles.safe}>
@@ -80,7 +57,7 @@ export default class UserDetail extends PureComponent {
             <Text>{user.get('website')}</Text>
             <Button
               title="To Todos"
-              onPress={() => this.props.navigation.navigate('Todos')}
+              onPress={() => navigation.navigate('Todos')}
             />
           </View>
           {
@@ -88,11 +65,9 @@ export default class UserDetail extends PureComponent {
               ? <Text style={styles.title}>Albums</Text>
               : null
           }
-          <FlatList
-            numColumns={3}
-            data={albums.toArray()}
-            renderItem={this._renderAlbumItem}
-            keyExtractor={this._keyExtractor}
+          <Albums
+            albums={albums}
+            navigation={navigation}
           />
           {
             posts.size > 0

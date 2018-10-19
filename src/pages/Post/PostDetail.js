@@ -17,7 +17,7 @@ class PostDetail extends PureComponent {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   safe: {
     flex: 1,
   },
@@ -29,5 +29,6 @@ const styles = {
   text: {
 
   },
-};
+});
+
 export default PostDetail;

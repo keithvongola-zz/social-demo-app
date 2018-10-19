@@ -17,26 +17,39 @@ class AlbumItem extends PureComponent {
       isPlaceholder,
       onPress,
       onPlaceholderPress,
+      title,
+      url,
     } = this.props;
     if (isPlaceholder) onPlaceholderPress();
+    else if (url) onPress(title, url);
     else onPress(id);
   }
 
   render() {
-    const { title, thumbnailUrl } = this.props;
+    const { title, thumbnailUrl, hideTitle } = this.props;
     return (
       <TouchableOpacity
         style={styles.touchable}
         onPress={this._onPress}
       >
         <View style={styles.container}>
-          <Image
-            source={{ uri: thumbnailUrl }}
-            style={styles.thumbnail}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
+          {
+             thumbnailUrl
+               ? (
+                 <Image
+                   source={{ uri: thumbnailUrl }}
+                   style={styles.thumbnail}
+                 />
+               )
+               : <View style={styles.thumbnail} />
+          }
+          {
+            title && !hideTitle ? (
+              <View style={styles.textContainer}>
+                <Text style={styles.title}>{title}</Text>
+              </View>
+            ) : null
+          }
         </View>
       </TouchableOpacity>
     );
@@ -69,16 +82,28 @@ const styles = StyleSheet.create({
   thumbnail: {
     height: itemWidth,
     width: itemWidth,
+    backgroundColor: 'white',
   },
 });
 
 AlbumItem.propTypes = {
   id: PropTypes.number.isRequired,
-  isPlaceholder: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  thumbnailUrl: PropTypes.string.isRequired,
+  isPlaceholder: PropTypes.bool,
+  hideTitle: PropTypes.bool,
+  title: PropTypes.string,
+  thumbnailUrl: PropTypes.string,
+  url: PropTypes.string,
   onPress: PropTypes.func.isRequired,
-  onPlaceholderPress: PropTypes.func.isRequired,
+  onPlaceholderPress: PropTypes.func,
+};
+
+AlbumItem.defaultProps = {
+  isPlaceholder: false,
+  hideTitle: false,
+  title: null,
+  thumbnailUrl: null,
+  url: null,
+  onPlaceholderPress: () => {},
 };
 
 export { AlbumItem };

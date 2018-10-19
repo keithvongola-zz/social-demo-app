@@ -13,6 +13,7 @@
       }
     ],
     "no-underscore-dangle": 0,
-    "react/prop-types": ["error", { "ignore": ["navigation"] }]
+    "react/prop-types": ["error", { "ignore": ["navigation"] }],
+    "no-use-before-define": 0
   }
 }

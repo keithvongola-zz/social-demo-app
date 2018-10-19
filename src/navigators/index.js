@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import { Users, UserDetail } from '../pages/Users';
-import { Album, Photo } from '../pages/Album';
-import { Posts, PostDetail } from '../pages/Post';
+import { Albums, Album, Photo } from '../pages/Album';
+import { PostDetail } from '../pages/Post';
 import { Todos, TodoDetail } from '../pages/Todo';
 
 const routeConfigs = {
@@ -18,6 +18,12 @@ const routeConfigs = {
     }),
   },
   Albums: {
+    screen: Albums,
+    navigationOptions: () => ({
+      title: 'Album',
+    }),
+  },
+  Album: {
     screen: Album,
     navigationOptions: () => ({
       title: 'Album',
@@ -27,12 +33,6 @@ const routeConfigs = {
     screen: Photo,
     navigationOptions: () => ({
       title: 'Photo',
-    }),
-  },
-  Posts: {
-    screen: Posts,
-    navigationOptions: () => ({
-      title: 'Post',
     }),
   },
   PostDetail: {

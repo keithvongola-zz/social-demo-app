@@ -7,6 +7,8 @@ import {
   GET_TODOS_SUCCESS,
   GET_ALBUMS_SUCCESS,
   GET_PHOTOS_SUCCESS,
+  CLEAR_USER_DATA,
+  GET_ALBUMS,
 } from '../actions/data';
 
 const initialState = fromJS({
@@ -19,12 +21,13 @@ const initialState = fromJS({
 });
 
 const actionsMap = {
-  [GET_USERS_SUCCESS]: (state, action) => state.mergeDeep(state, action.data),
-  [GET_POSTS_SUCCESS]: (state, action) => state.mergeDeep(state, action.data),
-  [GET_COMMENTS_SUCCESS]: (state, action) => state.mergeDeep(state, action.data),
-  [GET_TODOS_SUCCESS]: (state, action) => state.mergeDeep(state, action.data),
-  [GET_ALBUMS_SUCCESS]: (state, action) => state.mergeDeep(state, action.data),
-  [GET_PHOTOS_SUCCESS]: (state, action) => state.mergeDeep(state, action.data),
+  [GET_USERS_SUCCESS]: (state, action) => state.mergeDeep(action.data),
+  [GET_POSTS_SUCCESS]: (state, action) => state.mergeDeep(action.data),
+  [GET_COMMENTS_SUCCESS]: (state, action) => state.mergeDeep(action.data),
+  [GET_TODOS_SUCCESS]: (state, action) => state.mergeDeep(action.data),
+  [GET_ALBUMS]: state => state.merge({ album: [], photos: [] }),
+  [GET_ALBUMS_SUCCESS]: (state, action) => state.mergeDeep(action.data),
+  [GET_PHOTOS_SUCCESS]: (state, action) => state.mergeDeep(action.data),
 };
 
 export default createReducer(initialState, actionsMap);

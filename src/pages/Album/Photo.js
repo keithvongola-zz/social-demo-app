@@ -1,33 +1,46 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import {
-  View, Text, SafeAreaView,
+  View,
+  Image,
+  Text,
+  StyleSheet,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { fonts, metrics } from '../../styles';
 
-class Photo extends PureComponent {
-  render() {
-    return (
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.container}>
-          <Text style={styles.text}>
-            Photo
-          </Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
+const Photo = ({ navigation }) => {
+  const uri = navigation.getParam('url');
+  const title = navigation.getParam('title');
 
-const styles = {
-  safe: {
-    flex: 1,
-  },
+  return (
+    <View style={styles.container}>
+      <Image
+        source={{ uri }}
+        style={styles.image}
+        resizeMode="contain"
+      />
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  text: {
+  image: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  title: {
+    position: 'absolute',
+    color: 'white',
+    fontSize: fonts.smaller,
+    left: metrics.H_PADDING,
+    right: metrics.H_PADDING,
+    top: metrics.V_PADDING,
+    textAlign: 'center',
+  },
+});
 
-  },
-};
-export default Photo;
+export default withNavigation(Photo);

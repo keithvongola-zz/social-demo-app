@@ -10,24 +10,31 @@ import { AlbumItem } from '../../components';
 class Album extends PureComponent {
   constructor(props) {
     super(props);
-    this._renderItem = this._renderItem.bind(this);
-    this._onItemPress = this._onItemPress.bind(this);
+
+    this._renderAlbumItem = this._renderAlbumItem.bind(this);
+    this._onAlbumPress = this._onAlbumPress.bind(this);
+    this._onMoreAlbumPress = this._onMoreAlbumPress.bind(this);
   }
 
-  _onItemPress(title, url) {
+  _onAlbumPress(id) {
     const { navigation } = this.props;
-    navigation.navigate('Photo', { title, url });
+    navigation.navigate('Album', { id });
   }
 
-  _renderItem({ item }) {
+  _onMoreAlbumPress() {
+    const { navigation } = this.props;
+    navigation.navigate('Albums');
+  }
+
+  _renderAlbumItem({ item, index }) {
     return (
       <AlbumItem
-        hideTitle
+        isPlaceholder={item.get('isPlaceholder') || false}
         id={item.get('id')}
         title={item.get('title')}
-        url={item.get('url')}
         thumbnailUrl={item.get('thumbnailUrl')}
-        onPress={this._onItemPress}
+        onPress={this._onAlbumPress}
+        onPlaceholderPress={this._onMoreAlbumPress}
       />
     );
   }
@@ -37,15 +44,15 @@ class Album extends PureComponent {
   }
 
   render() {
-    const { photos } = this.props;
+    const { albums } = this.props;
 
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           <FlatList
             numColumns={3}
-            data={photos && photos.toArray()}
-            renderItem={this._renderItem}
+            data={albums && albums.toArray()}
+            renderItem={this._renderAlbumItem}
             keyExtractor={this._keyExtractor}
           />
         </View>
@@ -60,8 +67,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
+
 export default Album;

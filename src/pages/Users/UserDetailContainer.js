@@ -13,7 +13,7 @@ import {
 
 const mapStateToProps = (state, props) => ({
   user: selectUser(state, props),
-  albums: selectAlbumsPreview(state),
+  albums: selectAlbumsPreview(state, 5),
   posts: selectPosts(state),
 });
 
