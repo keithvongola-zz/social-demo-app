@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  View, SafeAreaView, Button, Text, FlatList, ScrollView, StyleSheet,
+  View, SafeAreaView, Button, Text, FlatList, ScrollView, StyleSheet, Linking,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { PostItem, InfoRow } from '../../components';
@@ -23,6 +23,34 @@ export default class UserDetail extends PureComponent {
 
     this._renderPostItem = this._renderPostItem.bind(this);
     this._onPostPress = this._onPostPress.bind(this);
+    this._onEmailPress = this._onEmailPress.bind(this);
+    this._onPhoneNumberPress = this._onPhoneNumberPress.bind(this);
+  }
+
+  _onEmailPress() {
+    const { user } = this.props;
+    const url = `mailto:${user.get('email')}`;
+
+    Linking.canOpenURL(url).then((supported) => {
+      if (!supported) {
+        console.log(`Can't handle url: ${url}`);
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
+  }
+
+  _onPhoneNumberPress() {
+    const { user } = this.props;
+    const url = `tel:${user.get('phone')}`;
+
+    Linking.canOpenURL(url).then((supported) => {
+      if (!supported) {
+        console.log(`Can't handle url: ${url}`);
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
   }
 
   _onPostPress(id) {
@@ -60,13 +88,15 @@ export default class UserDetail extends PureComponent {
           <View style={styles.infoContainer}>
             <InfoRow
               icon={icPhone}
-              field="Name"
+              field="Phone"
               value={user.get('phone')}
+              onPress={this._onPhoneNumberPress}
             />
             <InfoRow
               icon={icEmail}
               field="Email"
               value={user.get('email')}
+              onPress={this._onEmailPress}
             />
             <InfoRow
               icon={icWebsite}
