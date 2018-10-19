@@ -45,7 +45,7 @@ class AlbumItem extends PureComponent {
                    style={styles.thumbnail}
                  />
                )
-               : <View style={styles.thumbnail} />
+               : <View style={styles.placeholder} />
           }
           {
             !hideTitle && title ? (
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     width: itemWidth,
   },
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   textContainer: {
     position: 'absolute',
@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
     color: colors.blue,
   },
   thumbnail: {
+    height: itemWidth,
+    width: itemWidth,
+    backgroundColor: colors.white,
+  },
+  placeholder: {
     height: itemWidth,
     width: itemWidth,
     backgroundColor: colors.tomato,
