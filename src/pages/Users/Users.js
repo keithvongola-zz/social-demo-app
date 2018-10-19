@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
 import { UserItem } from '../../components';
+import { colors } from '../../styles';
 
 export default class Users extends PureComponent {
   constructor(props) {
@@ -19,9 +20,9 @@ export default class Users extends PureComponent {
     getUsers();
   }
 
-  _onUserPress(id) {
+  _onUserPress(id, name) {
     const { navigation } = this.props;
-    navigation.navigate('UserDetail', { id });
+    navigation.navigate('UserDetail', { id, name });
   }
 
   _renderItem({ item }) {
@@ -47,7 +48,7 @@ export default class Users extends PureComponent {
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           <FlatList
-            data={users.toArray()}
+            data={users && users.toArray()}
             renderItem={this._renderItem}
             keyExtractor={this._keyExtractor}
           />
@@ -63,9 +64,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  text: {
-
+    backgroundColor: colors.lighter,
   },
 });
 

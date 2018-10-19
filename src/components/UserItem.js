@@ -17,8 +17,8 @@ class UserItem extends PureComponent {
   }
 
   _onPress() {
-    const { id, onPress } = this.props;
-    onPress(id);
+    const { id, onPress, name } = this.props;
+    onPress(id, name);
   }
 
   render() {

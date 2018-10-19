@@ -13,8 +13,8 @@ const routeConfigs = {
   },
   UserDetail: {
     screen: UserDetail,
-    navigationOptions: () => ({
-      title: 'User Detail',
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.getParam('name', 'User detail'),
     }),
   },
   Albums: {
@@ -56,7 +56,10 @@ const routeConfigs = {
 };
 
 const StackNavigatorConfig = {
-
+  headerBackTitleVisible: false,
+  navigationOptions: () => ({
+    headerBackTitle: null,
+  }),
 };
 
 export default createStackNavigator(

@@ -3,9 +3,12 @@ import {
   View, SafeAreaView, Button, Text, FlatList, ScrollView, StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { PostItem } from '../../components';
+import { PostItem, InfoRow } from '../../components';
 import Albums from '../Album/Albums';
-import { fonts } from '../../styles';
+import { fonts, metrics, colors } from '../../styles';
+import {
+  icPhone, icWebsite, icLocation, icEmail,
+} from '../../images';
 
 export default class UserDetail extends PureComponent {
   componentDidMount() {
@@ -47,14 +50,34 @@ export default class UserDetail extends PureComponent {
       user, albums, posts, navigation,
     } = this.props;
 
+    let address = user.getIn(['address', 'suite']);
+    address += `, ${user.getIn(['address', 'street'])}`;
+    address += `, ${user.getIn(['address', 'city'])}`;
+
     return (
       <SafeAreaView style={styles.safe}>
         <ScrollView style={styles.container}>
           <View style={styles.infoContainer}>
-            <Text>{user.get('name')}</Text>
-            <Text>{user.get('phone')}</Text>
-            <Text>{user.get('email')}</Text>
-            <Text>{user.get('website')}</Text>
+            <InfoRow
+              icon={icPhone}
+              field="Name"
+              value={user.get('phone')}
+            />
+            <InfoRow
+              icon={icEmail}
+              field="Email"
+              value={user.get('email')}
+            />
+            <InfoRow
+              icon={icWebsite}
+              field="Website"
+              value={user.get('website')}
+            />
+            <InfoRow
+              icon={icLocation}
+              field="Address"
+              value={address}
+            />
             <Button
               title="To Todos"
               onPress={() => navigation.navigate('Todos')}
@@ -91,11 +114,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: colors.lighter,
   },
   infoContainer: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   title: {
+    backgroundColor: colors.white,
+    marginTop: 8,
+    paddingVertical: 8,
+    paddingLeft: metrics.H_PADDING,
     fontSize: fonts.bigger,
     fontWeight: fonts.bolder,
   },
