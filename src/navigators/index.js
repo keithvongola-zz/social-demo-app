@@ -4,24 +4,25 @@ import { Albums, Album, Photo } from '../pages/Album';
 import { PostDetail } from '../pages/Post';
 import { Todos } from '../pages/Todo';
 import WebPage from '../pages/WebPage';
+import strings from '../locales';
 
 const routeConfigs = {
   Users: {
     screen: Users,
     navigationOptions: () => ({
-      title: 'Users',
+      title: strings.title__users,
     }),
   },
   UserDetail: {
     screen: UserDetail,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.getParam('name', 'User detail'),
+      title: navigation.getParam('name', strings.title__users_detail),
     }),
   },
   Albums: {
     screen: Albums,
     navigationOptions: () => ({
-      title: 'Albums',
+      title: strings.title__albums,
     }),
   },
   Album: {
@@ -36,13 +37,13 @@ const routeConfigs = {
   PostDetail: {
     screen: PostDetail,
     navigationOptions: () => ({
-      title: 'Comments',
+      title: strings.title__comments,
     }),
   },
   Todos: {
     screen: Todos,
     navigationOptions: () => ({
-      title: 'Todos',
+      title: strings.title__todos,
     }),
   },
   WebPage: {

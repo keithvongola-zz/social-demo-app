@@ -43,6 +43,7 @@ class AlbumItem extends PureComponent {
                    source={{ uri: thumbnailUrl }}
                    defaultSource={imagePlaceholder}
                    style={styles.thumbnail}
+                   resizeMode="contain"
                  />
                )
                : <View style={styles.placeholder} />

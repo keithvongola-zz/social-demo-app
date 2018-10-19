@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { userThumbnail } from '../images';
-import { metrics, fonts } from '../styles';
+import { metrics, fonts, colors } from '../styles';
 
 class UserItem extends PureComponent {
   constructor(props) {
@@ -46,7 +46,7 @@ class UserItem extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     minHeight: 64,
     alignItems: 'center',
     flexDirection: 'row',

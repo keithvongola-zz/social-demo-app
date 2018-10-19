@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { fonts, metrics } from '../../styles';
+import { fonts, metrics, colors } from '../../styles';
 import { imagePlaceholder } from '../../images';
 
 const Photo = ({ navigation }) => {
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   title: {
     position: 'absolute',
-    color: 'white',
+    color: colors.white,
     fontSize: fonts.smaller,
     left: metrics.H_PADDING,
     right: metrics.H_PADDING,

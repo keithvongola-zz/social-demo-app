@@ -6,8 +6,4 @@ const mapStateToProp = state => ({
   albums: selectAlbumsPreview(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(mapStateToProp, mapDispatchToProps)(Albums);
+export default connect(mapStateToProp, null)(Albums);

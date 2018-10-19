@@ -10,6 +10,7 @@ import { fonts, metrics, colors } from '../../styles';
 import {
   icPhone, icWebsite, icLocation, icEmail, icTodos, icCompany,
 } from '../../images';
+import strings from '../../locales';
 
 export default class UserDetail extends PureComponent {
   componentDidMount() {
@@ -60,7 +61,7 @@ export default class UserDetail extends PureComponent {
   _onWebsitePress() {
     const { user, navigation } = this.props;
     const url = `https://${user.get('website')}`;
-    navigation.navigate('WebPage', { url, title: 'Website' });
+    navigation.navigate('WebPage', { url, title: strings.user_detail__website });
   }
 
   _onAddressPress() {
@@ -68,7 +69,7 @@ export default class UserDetail extends PureComponent {
     const geo = user.getIn(['address', 'geo']);
     const url = `https://www.google.com/maps/search/?api=1&query=${geo.get('lat')},${geo.get('lng')}`;
 
-    navigation.navigate('WebPage', { url, title: 'Address' });
+    navigation.navigate('WebPage', { url, title: strings.user_detail__address });
   }
 
   _onTodosPress() {
@@ -116,37 +117,37 @@ export default class UserDetail extends PureComponent {
           <View style={styles.infoContainer}>
             <InfoRow
               icon={icPhone}
-              field="Phone"
+              field={strings.user_detail__phone}
               value={user.get('phone')}
               onPress={this._onPhoneNumberPress}
             />
             <InfoRow
               icon={icEmail}
-              field="Email"
+              field={strings.user_detail__email}
               value={user.get('email')}
               onPress={this._onEmailPress}
             />
             <InfoRow
               icon={icWebsite}
-              field="Website"
+              field={strings.user_detail__website}
               value={user.get('website')}
               onPress={this._onWebsitePress}
             />
             <InfoRow
               icon={icLocation}
-              field="Address"
+              field={strings.user_detail__address}
               value={address}
               onPress={this._onAddressPress}
             />
             <InfoRow
               icon={icCompany}
-              field="Company"
+              field={strings.user_detail__company}
               value={user.getIn(['company', 'name'])}
               onPress={this._onWebsitePress}
             />
             <Button
               image={icTodos}
-              text="Todos"
+              text={strings.user_detail__todos}
               onPress={this._onTodosPress}
             />
           </View>
@@ -161,12 +162,12 @@ export default class UserDetail extends PureComponent {
               )
               : (
                 <View>
-                  <Text style={styles.title}>Albums</Text>
+                  <Text style={styles.title}>{strings.user_detail__albums}</Text>
                   <Albums
                     albums={albums}
                     navigation={navigation}
                   />
-                  <Text style={styles.title}>Posts</Text>
+                  <Text style={styles.title}>{strings.user_detail__posts}</Text>
                   <FlatList
                     data={posts.toArray()}
                     renderItem={this._renderPostItem}
