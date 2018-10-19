@@ -3,8 +3,10 @@ import {
   View, Text, TouchableOpacity, StyleSheet, Image, Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { imagePlaceholder } from '../images';
 
 const itemWidth = Dimensions.get('window').width / 3;
+
 class AlbumItem extends PureComponent {
   constructor(props) {
     super(props);
@@ -38,6 +40,7 @@ class AlbumItem extends PureComponent {
                ? (
                  <Image
                    source={{ uri: thumbnailUrl }}
+                   defaultSource={imagePlaceholder}
                    style={styles.thumbnail}
                  />
                )
@@ -82,7 +85,6 @@ const styles = StyleSheet.create({
   thumbnail: {
     height: itemWidth,
     width: itemWidth,
-    backgroundColor: 'white',
   },
 });
 

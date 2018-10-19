@@ -16,9 +16,9 @@ class PostItem extends PureComponent {
   }
 
   render() {
-    const { title, body } = this.props;
+    const { title, body, onPress } = this.props;
     return (
-      <TouchableOpacity onPress={this._onPress}>
+      <TouchableOpacity onPress={this._onPress} disabled={!onPress}>
         <View style={styles.container}>
           <Text
             style={styles.title}
@@ -58,7 +58,11 @@ PostItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired,
+  onPress: PropTypes.func,
+};
+
+PostItem.defaultProps = {
+  onPress: null,
 };
 
 export { PostItem };

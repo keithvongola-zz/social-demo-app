@@ -1,3 +1,3 @@
-import PostDetail from './PostDetail';
+import PostDetail from './PostDetail.Container';
 
 export { PostDetail };

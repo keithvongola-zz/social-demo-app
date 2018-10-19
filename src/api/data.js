@@ -31,7 +31,7 @@ export const getPosts = (userId) => {
 };
 
 export const getComments = (postId) => {
-  const path = `/posts?postId=${encodeURIComponent(postId)}`;
+  const path = `/comments?postId=${encodeURIComponent(postId)}`;
   return fetchResource(path);
 };
 

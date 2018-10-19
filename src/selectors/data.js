@@ -77,6 +77,20 @@ export const selectPosts = createSelector(
   data => data.get('posts'),
 );
 
+export const selectPostWithPostId = createSelector(
+  selectPosts,
+  selectId,
+  (posts, postId) => {
+    const post = posts.find(o => o.get('id') === postId);
+    return post;
+  },
+);
+
+export const selectComments = createSelector(
+  selectData,
+  data => data.get('comments'),
+);
+
 export const selectTodos = createSelector(
   selectData,
   data => data.get('todos'),

@@ -1,16 +1,59 @@
 import React, { PureComponent } from 'react';
 import {
-  View, Text, SafeAreaView,
+  View,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
+import { List, Map } from 'immutable';
+import { PostItem, CommentItem } from '../../components';
 
 class PostDetail extends PureComponent {
+  constructor(props) {
+    super(props);
+    this._renderItem = this._renderItem.bind(this);
+  }
+
+  componentDidMount() {
+    const { navigation, getComments } = this.props;
+    const postId = navigation.getParam('id');
+    if (postId) getComments(postId);
+  }
+
+  _renderItem({ item }) {
+    return (
+      <CommentItem
+        email={item.get('email')}
+        title={item.get('name')}
+        body={item.get('body')}
+      />
+    );
+  }
+
+  _keyExtractor(item, index) {
+    return `${index}::${item.get('id')}`;
+  }
+
   render() {
+    const { post, comments } = this.props;
+
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
-          <Text style={styles.text}>
-            Post detail
-          </Text>
+          <FlatList
+            ListHeaderComponent={(
+              <PostItem
+                id={post.get('id')}
+                title={post.get('title')}
+                body={post.get('body')}
+              />
+              )
+            }
+            data={comments && comments.toArray()}
+            renderItem={this._renderItem}
+            keyExtractor={this._keyExtractor}
+          />
         </View>
       </SafeAreaView>
     );
@@ -23,12 +66,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-
   },
 });
+
+PostDetail.propTypes = {
+  getComments: PropTypes.func.isRequired,
+  post: PropTypes.instanceOf(Map).isRequired,
+  comments: PropTypes.instanceOf(List).isRequired,
+};
+
 
 export default PostDetail;
