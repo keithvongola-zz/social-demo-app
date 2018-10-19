@@ -17,7 +17,7 @@ const routeConfigs = {
       title: 'User Detail',
     }),
   },
-  Album: {
+  Albums: {
     screen: Album,
     navigationOptions: () => ({
       title: 'Album',

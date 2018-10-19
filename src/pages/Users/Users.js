@@ -1,24 +1,55 @@
 import React, { PureComponent } from 'react';
 import {
-  View, SafeAreaView, Button,
+  View, SafeAreaView, FlatList, StyleSheet,
 } from 'react-native';
-import { connect } from 'react-redux';
-import {
-  getUsers,
-} from '../../actions/data';
+import PropTypes from 'prop-types';
+import { List } from 'immutable';
+import { UserItem } from '../../components';
 
-class Users extends PureComponent {
+export default class Users extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._renderItem = this._renderItem.bind(this);
+    this._onUserPress = this._onUserPress.bind(this);
+  }
+
   componentDidMount() {
-    this.props.getUsers();
+    const { getUsers } = this.props;
+    getUsers();
+  }
+
+  _onUserPress(id) {
+    const { navigation } = this.props;
+    navigation.navigate('UserDetail', { id });
+  }
+
+  _renderItem({ item }) {
+    return (
+      <UserItem
+        id={item.get('id')}
+        name={item.get('name')}
+        email={item.get('email')}
+        company={item.getIn(['company', 'name'])}
+        onPress={this._onUserPress}
+      />
+    );
+  }
+
+  _keyExtractor(item, index) {
+    return `${index}::${item.get('id')}`;
   }
 
   render() {
+    const { users } = this.props;
+
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
-          <Button
-            title="To user detail"
-            onPress={() => this.props.navigation.navigate('UserDetail')}
+          <FlatList
+            data={users.toArray()}
+            renderItem={this._renderItem}
+            keyExtractor={this._keyExtractor}
           />
         </View>
       </SafeAreaView>
@@ -26,22 +57,19 @@ class Users extends PureComponent {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   safe: {
     flex: 1,
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   text: {
 
   },
-};
-
-const mapDispatchToProps = dispatch => ({
-  getUsers: () => dispatch(getUsers()),
 });
 
-export default connect(null, mapDispatchToProps)(Users);
+Users.propTypes = {
+  getUsers: PropTypes.func.isRequired,
+  users: PropTypes.instanceOf(List).isRequired,
+};

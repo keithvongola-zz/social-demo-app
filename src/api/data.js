@@ -45,7 +45,10 @@ export const getAlbums = (userId) => {
   return fetchResource(path);
 };
 
-export const getPhotos = (albumId) => {
-  const path = `/photos?albumId=${encodeURIComponent(albumId)}`;
+export const getPhotos = (albumIds) => {
+  let path = '/photos?';
+  albumIds.forEach((id) => {
+    path += `albumId=${encodeURIComponent(id)}&`;
+  });
   return fetchResource(path);
 };

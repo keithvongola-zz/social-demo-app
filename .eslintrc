@@ -11,6 +11,8 @@
           ".jsx"
         ]
       }
-    ]
+    ],
+    "no-underscore-dangle": 0,
+    "react/prop-types": ["error", { "ignore": ["navigation"] }]
   }
 }

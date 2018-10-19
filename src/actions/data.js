@@ -31,9 +31,9 @@ export const getAlbums = userId => ({
   userId,
 });
 
-export const getPhotos = albumId => ({
+export const getPhotos = albumIds => ({
   type: GET_PHOTOS,
-  albumId,
+  albumIds,
 });
 
 export const getTodos = userId => ({

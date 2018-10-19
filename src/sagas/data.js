@@ -92,6 +92,13 @@ function* handleGetAlbums(actions) {
     const { userId } = actions;
     const albums = yield call(getAlbums, userId);
     yield put({ type: GET_ALBUMS_SUCCESS, data: { albums } });
+
+    const albumIds = albums.reduce((acc, item) => {
+      acc.push(item.id);
+      return acc;
+    }, []);
+
+    yield put({ type: GET_PHOTOS, albumIds });
   } catch (e) {
     yield put({ type: GET_ALBUMS_FAIL });
   }
@@ -103,8 +110,8 @@ function* getAlbumsWatcher() {
 
 function* handleGetPhotos(actions) {
   try {
-    const { albumId } = actions;
-    const photos = yield call(getPhotos, albumId);
+    const { albumIds } = actions;
+    const photos = yield call(getPhotos, albumIds);
     yield put({ type: GET_PHOTOS_SUCCESS, data: { photos } });
   } catch (e) {
     yield put({ type: GET_PHOTOS_FAIL });
